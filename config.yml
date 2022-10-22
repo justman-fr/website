@@ -1,0 +1,77 @@
+title: 'JustMan'
+baseline: 'Le Web 1.0 '
+baseurl: 'https://justman.fr/'
+description: 'Nous souhaitons partager, à travers des articles et tutos, notre passion pour le Web. Pas de pub, de lien sponsorisé, de réseaux sociaux, de cookies intrusifs ici.'
+author:
+    name: 'JustMan'
+    url: 'https://justman.fr/'
+image: justman-card.png
+socials:
+    github: https://github.com/justman-fr
+language: fr
+
+languages:
+  - code: fr
+    name: Français
+    locale: fr_FR
+menus:
+  main:
+    - id: index
+      weight: 0
+      enabled: false
+    - id: tutos
+      name: Tutorials
+      weight: 10
+    - id: news
+      name: Articles
+      weight: 20
+    - id: support
+      enabled: false
+  footer:
+    - id: mentions-legales
+      name: Mentions légales
+      weight: 10
+
+
+theme:
+  - pwa
+serviceworker:
+  enabled: true
+manifest:
+  background_color: '#121B4F'
+  theme_color: '#FFFFFF'
+  icons:
+    - icon-192x192.jpg
+    - icon-512x512.jpg
+
+pagination:
+  max: 6
+metatags:
+  jsonld: true
+  articles: news
+body:
+  images:
+    lazy:
+      enabled: true
+    caption:
+      enabled: true
+    resize:
+      enabled: true
+    responsive:
+      enabled: true
+    webp:
+      enabled: true
+    remote:
+      enabled: true
+  notes:
+    enabled: true
+  highlight:
+    enabled: true
+assets:
+  images:
+    optimize:
+      enabled: true
+    responsive:
+      enabled: true
+    webp:
+      enabled: true

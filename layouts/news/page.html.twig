@@ -1,0 +1,78 @@
+{% extends '_default/page.html.twig' %}
+
+
+    {%- block stylesheet ~%}
+        {% if page.highlight is defined %}
+            <link
+                    rel="stylesheet"
+                    href=" {{ asset('highlightjs/highlight.css') }}"
+            />
+            <link
+                    rel="stylesheet"
+                    href=" {{ asset('highlightjs/highlightjs-copy.min.css') }}"
+            />
+        {% endif %}
+    {%- endblock ~%}
+
+            {%- block content ~%}
+
+                <div class="intro w-full  relative bg-cover overflow-hidden flex items-center">
+                    <div class="cloud-1 w-[160vw] h-[150vh] bg-secondary rounded-full absolute -top-[100vh] -right-[100vw] blur-3xl opacity-50"></div>
+                    <div class="cloud-1 w-[140vw] h-[140vh] bg-secondary rounded-full absolute -left-[85vw] -bottom-[80vh] blur-3xl opacity-50"></div>
+
+                    <div class="container container-md mx-auto pt-24 md:pt-48 pb-10 md:pb-28 px-6">
+                        <div class="flex flex-col md:flex-row gap-10 md:gap-16 items-center">
+                            <div class="md:basis-1/2 flex flex-col justify-center md:justify-start gap-0 md:gap-6 content">
+                                <h1 class="text-xl lg:text-4xl font-bold text-center md:text-left">{{ page.title|e }}</h1>
+                                <time class="text-center md:text-left">{{ page.date|format_date('long') }}</time>
+                                <p class="text-gris " >{{ page.content|excerpt_html() }}</p>
+                            </div>
+                            <div class="md:basis-1/2 fade-in ">
+                                {% if page.image is defined %}{{ asset(page.image)|html({alt: page.title}) }}{% else %}{{ asset('pages/welcome.jpg')|html({alt: page.title}) }}{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if page.content|excerpt_html({capture : 'after'}) %}
+                    <div class="container container-md mx-auto py-10 md:py-28 text-gris px-6 content">
+                        {{ page.content|excerpt_html({capture : 'after'}) }}
+                    </div>
+                {% endif %}
+
+                {%- if page.prev is defined or page.next is defined ~%}
+                    <nav class="w-full py-16">
+                        <ul class="flex flex-row justify-center items-center gap-10">
+                            {%- if page.prev is defined ~%}
+                                <li><a href="{{ url(page.prev) }}"
+                                       class="px-10 py-4 rounded-full bg-color text-white transition-all hover:scale-105 hover:no-underline">{{ page.prev.title }}</a>
+                                </li>
+                            {%- endif ~%}
+                            {%- if page.next is defined ~%}
+                                <li><a href="{{ url(page.next) }}"
+                                       class="px-10 py-4 rounded-full bg-color text-white transition-all hover:scale-105 hover:no-underline">{{ page.next.title }}</a>
+                                </li>
+                            {%- endif ~%}
+                        </ul>
+                    </nav>
+                {%- endif ~%}
+            {%- endblock content ~%}
+
+    {%- block javascript ~%}
+    {% if page.highlight is defined %}
+    <script src="{{ asset('highlightjs/highlight.min.js') }}"></script>
+    <script src="{{ asset('highlightjs/highlightjs-copy.min.js') }}"></script>
+    <script >
+    hljs.addPlugin(
+        new CopyButtonPlugin({
+          hook: (text, el) => {
+
+            return text;
+          },
+
+        })
+      );
+      hljs.highlightAll();
+</script>
+    {% endif %}
+    {%- endblock ~%}

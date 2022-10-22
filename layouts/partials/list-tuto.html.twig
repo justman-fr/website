@@ -1,0 +1,16 @@
+<div class="projItem itemList bg-white/10 p-6 rounded-md text-left ">
+    <span class="cover">
+         <a
+                 href="{{ url(tuto) }}" title="{{ tuto.title }}">
+        {% if tuto.image is defined %}{{ asset(tuto.image)|html({alt: tuto.title}) }}{% else %}{{ asset('pages/welcome.jpg')|html({alt: tuto.title}) }}{% endif %}
+         </a>
+    </span>
+    <h3 class="text-base md:text-xl font-bold py-4">{{ tuto.title }}</h3>
+    <div class="flex flex-row items-center gap-2">
+        <a class="text-white bg-color font-bold py-2 px-4 rounded-md transition-all hover:no-underline hover:bg-colorHover"
+           href="{{ url(tuto) }}" title="{{ tuto.title }}">
+            Voir le tutorial
+        </a>
+
+    </div>
+</div>

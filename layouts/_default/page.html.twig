@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="manifest" href="{{ url('manifest') }}">
+    {%~ include 'partials/metatags.html.twig' ~%}
+    <link rel="preload" href="{{ asset('styles.css') -}}" as="style" />
+    <link rel="stylesheet" href="{{ asset('styles.css') }}" />
+    <style>
+        {%- block style ~%}
+        {%- endblock ~%}
+    </style>
+    {%- block stylesheet ~%}
+    {%- endblock ~%}
+</head>
+<body class="leading-normal tracking-normal text-white bg-primary">
+<div class="h-screen pb-14">
+    {#- Nav ~#}
+    <div class="w-full fixed z-50 h-32 bg-gradient-to-b from-primary to-primary/0 hidden lg:block">
+        <div class="container mx-auto p-6">
+            <div class="w-full flex items-center justify-between">
+                {#- NAVIGATION ~#}
+                <div>
+                    <nav>
+                        <ul class="flex flex-row gap-4">
+                            {% for entry in site.menus.main|sort_by_weight %}
+                                <li class="pr-4"><a href="{{ url(entry.url) }}" data-weight="{{ entry.weight }}"
+                                                    class="text-gris font-medium">{{ entry.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+                {#- LOGO ~#}
+                <div>
+                    <a class="flex items-center no-underline hover:no-underline font-serif font-bold text-2xl lg:text-4xl"
+                       href="{{ url() }}">
+                        <img src="/logo.svg" alt="JustMan">
+                    </a>
+                </div>
+                {#- LINKS ~#}
+                <div class="flex flex-row items-center gap-4">
+                    <a href="{{ url("support") }}"
+                       class="text-white bg-color font-bold py-2 px-4 rounded-md transition-all hover:no-underline hover:bg-colorHover">
+                        support
+                    </a>
+                    <a class="inline-block no-underline hover:text-slate-700 dark:hover:text-slate-100 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
+                       target="_blank" href="{{ site.socials.github }}">
+                        <img src="/icons/github.svg" alt="github" class="object-contain w-[32px]">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="offcanvas-menu block lg:hidden">
+        <input type="checkbox" id="toogle-menu"/>
+
+        <label for="toogle-menu" class="toogle-open">
+            <span class="bg-white before:bg-white after:bg-white"></span>
+        </label>
+        <div class="fixed z-40 bg-primary top-0 l-0 w-full h-[70px] flex justify-center items-center">
+            {#- LOGO ~#}
+            <div class="fixed">
+                <a class="flex items-center  "
+                   href="{{ url() }}">
+                    <img src="/logo.svg" alt="JustMan">
+                </a>
+            </div>
+            <a class="fixed z-50 right-[30px] no-underline hover:text-slate-700 dark:hover:text-slate-100 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
+               target="_blank" href="{{ site.socials.github }}">
+                <img src="/icons/github.svg" alt="github" class="object-contain w-[32px]">
+            </a>
+        </div>
+        <nav>
+            <div class="flex justify-between items-center">
+                <a class="flex items-center"
+                   href="{{ url() }}">
+                    {# {{ site.title }} #}
+                    <img src="/logo.svg" alt="JustMan">
+                </a>
+                <label for="toogle-menu" class="toogle-close">
+                    <span class="bg-white before:bg-white after:bg-white"></span>
+                </label>
+            </div>
+            <ul class="flex flex-col justify-center items-center gap-4 mt-14">
+                {% for entry in site.menus.main|sort_by_weight %}
+                    <li class="pr-4">
+                        <a href="{{ url(entry.url) }}" data-weight="{{ entry.weight }}"
+                           class="text-gris font-medium transition-all hover:no-underline hover:text-color">{{ entry.name }}</a>
+                    </li>
+                {% endfor %}
+                <li class="mt-16">
+                    <a href="{{ url('support') }}"
+                       class="text-white bg-color font-bold py-2 px-4 rounded-md transition-all hover:no-underline hover:bg-colorHover">
+                        support
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    {%- block content ~%}
+        {{ page.content }}
+    {%- endblock ~%}
+
+    <div class="w-full bg-white/10">
+        <div class="container mx-auto p-6">
+            <div class="w-full flex items-center justify-between">
+                <div class="footerLogo hidden md:block">
+                    <a href="{% if site.language == 'en' %}{{ url() }}{% else %}{{ url() }}{{ site.language }}{% endif %}">
+                        {{ site.title }}
+                    </a>
+                </div>
+                <div class="footerNav">
+                    <nav>
+                        <ul class="flex flex-row items-center gap-4">
+                            {% for footer in site.menus.footer|sort_by_weight %}
+                                <li><a href="{{ url(footer.url) }}"
+                                       data-weight="{{ footer.weight }}">{{ footer.name }}</a></li>
+                            {% endfor %}
+                            <li><a class="text-slate-700 dark:text-slate-300 no-underline hover:no-underline"
+                                   href="{{ cecil.url }}"
+                                   target="_blank">{% trans with {'%powered_by%': 'Cecil'} %}Powered by %powered_by%{% endtrans %}</a>
+                            </li>
+                            <li>
+                                <a class="" target="_blank" href="{{ site.socials.github }}">
+                                    <img src="/icons/github.svg" alt="github" class="object-contain w-[32px]">
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'partials/regsw.js.twig' %}
+{%- block javascript ~%}
+{%- endblock ~%}
+
+</body>
+</html>

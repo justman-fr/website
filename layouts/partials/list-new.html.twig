@@ -1,0 +1,14 @@
+<div class="itemList bg-white/10 p-6 rounded-md text-left">
+    <a href="{{ url(new) }}" title="{{ new.description|default() }}" class="cover">
+        {% if new.image is defined %}{{ asset(new.image)|html({alt: new.title}) }}{% else %}{{ asset('pages/welcome.jpg')|html({alt: new.title}) }}{% endif %}
+    </a>
+        <h3 class="text-base md:text-xl font-bold py-4">{{ new.title }}</h3>
+        <p>{{ new.date|format_date('long') }}</p>
+        <div class="flex flex-row items-center gap-2 pt-4">
+            <a href="{{ url(new) }}"
+               class="text-white bg-color font-bold py-2 px-4 rounded-md transition-all hover:no-underline hover:bg-colorHover">
+                Lire l'article
+            </a>
+        </div>
+
+</div>

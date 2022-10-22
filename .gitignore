@@ -1,0 +1,12 @@
+
+_site/
+
+.idea/
+
+.cache/
+
+.cecil/
+
+vendor/
+
+assets/img/.DS_Store

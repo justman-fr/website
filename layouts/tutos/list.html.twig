@@ -1,0 +1,25 @@
+{% extends '_default/list.html.twig' %}
+{%- block content ~%}
+    <div class="intro w-full min-h-[90vh] relative bg-cover overflow-hidden flex" style="">
+        <div class="cloud-1 w-[160vw] h-[150vh] bg-secondary rounded-full absolute -top-[100vh] -right-[100vw] blur-3xl opacity-50"></div>
+        <div class="cloud-1 w-[140vw] h-[140vh] bg-secondary rounded-full absolute -left-[85vw] -bottom-[80vh] blur-3xl opacity-50"></div>
+
+        <div class="container mx-auto px-6 py-10 text-center pt-32 lg:pt-44">
+            <h1 class="text-lg md:text-xl lg:text-4xl font-bold mb-10 lg:mb-20">{{ page.title|e }}</h1>
+            
+
+            
+            <div class="projList grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-6">
+            {# <div class="projList"> #}
+            {%- for tuto in site.pages.showable|filter_by('section', 'tutos')|sort_by_date|slice(0, 4) ~%}
+                {% include 'partials/list-tuto.html.twig' with {'tuto': tuto} only %}
+            {%- endfor ~%}
+            </div>
+            {%~ include 'partials/pagination.html.twig' ~%}
+        </div>
+    </div>
+{%- endblock content ~%}
+
+{%- block javascript ~%}
+
+{%- endblock ~%}
